@@ -33,6 +33,8 @@ namespace GwesReportApi.Models
         {
             modelBuilder.Entity<UserModel>().HasNoKey();
             modelBuilder.Entity<DocModel>().HasNoKey();
+            modelBuilder.Entity<AdvAccountProfile>().HasNoKey();
+
         }
 
         public DbSet<UserModel> DbUsers { get; set; }
