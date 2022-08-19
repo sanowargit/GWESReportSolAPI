@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 
 namespace GwesReportApi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
