@@ -61,6 +61,10 @@ namespace GwesReportApi.Models
         public int FAS157LvlId { get; set; }
         public string ASC820 { get; set; }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b991a82402d314b2500366d960e0112a44d507e
     }
     public class AcctHoldingInput
     {
