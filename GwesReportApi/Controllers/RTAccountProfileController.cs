@@ -12,7 +12,7 @@ namespace GwesReportApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class RTAccountProfileController : Controller
     {
         private IConfiguration _config;
@@ -29,7 +29,7 @@ namespace GwesReportApi.Controllers
         public List<RTAccountProfile> RTAccount([FromBody] rtacctInput acctInput)
         {
 
-            var doc = new List<RTAccountProfile>();
+            var rtAcctProf = new List<RTAccountProfile>();
             var database = new GwesDbContext();
             var connection = database.Database.GetDbConnection();
             var dataset = new DataSet();
@@ -40,8 +40,8 @@ namespace GwesReportApi.Controllers
             command.CommandType = CommandType.StoredProcedure;
             adapter.SelectCommand = command;
             adapter.Fill(dataset);
-            doc = dataset.Tables[0].ToList<RTAccountProfile>();
-            return doc;
+            rtAcctProf = dataset.Tables[0].ToList<RTAccountProfile>();
+            return rtAcctProf;
         }
     }
 }

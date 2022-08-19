@@ -17,11 +17,11 @@ namespace GwesReportApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class AdvAccountProfileController : ControllerBase
+    public class RTGetDefaultController : ControllerBase
     {
         private IConfiguration _config;
         private readonly GwesDbContext _context;
-        public AdvAccountProfileController(IConfiguration config, GwesDbContext context)
+        public RTGetDefaultController(IConfiguration config, GwesDbContext context)
         {
             _config = config;
 
@@ -30,26 +30,23 @@ namespace GwesReportApi.Controllers
 
         [HttpPost]
         /*[Authorize]*/
-        public AdvAccountProfile Account([FromBody] acctInput acctInput)
+        public RTGetDefault Account([FromBody] gdInput acctInput)
         {
 
-            var advAcctProf = new AdvAccountProfile();
+            var rtGetDefault = new RTGetDefault();
             var database = new GwesDbContext();
             var connection = database.Database.GetDbConnection();
             var dataset = new DataSet();
             var adapter = new SqlDataAdapter();
 
-            var command = new SqlCommand("AdvAccountProfile", (Microsoft.Data.SqlClient.SqlConnection)connection);
-            command.Parameters.AddWithValue("@UserId", acctInput.UserId);
-            command.Parameters.AddWithValue("@RoleTypId", acctInput.RoleTypId);
-            command.Parameters.AddWithValue("@AcctId", acctInput.AcctId);
+            var command = new SqlCommand("RT_GetDefault", (Microsoft.Data.SqlClient.SqlConnection)connection);
+            command.Parameters.AddWithValue("@EmailAdrs", acctInput.EmailAdrs);
             command.CommandType = CommandType.StoredProcedure;
             adapter.SelectCommand = command;
             adapter.Fill(dataset);
-            advAcctProf.T1 = dataset.Tables[0].ToList<AcctProfileT1>();
-            advAcctProf.T2 = dataset.Tables[1].ToList<AcctProfileT2>();
-            advAcctProf.T3 = dataset.Tables[2].ToList<AcctProfileT3>();
-            return advAcctProf;     
+            rtGetDefault.Contact = dataset.Tables[0].ToList<GetDefaultContact>();
+            rtGetDefault.Role = dataset.Tables[1].ToList<GetDefaultRole>();
+            return rtGetDefault;
         }
 
 
