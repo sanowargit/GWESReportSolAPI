@@ -22,7 +22,10 @@ namespace GwesReportApi.Helpers
 
                 foreach (var properties in objectProperties.Where(properties => columnNames.Contains(properties.Name) && dataRow[properties.Name] != DBNull.Value))
                 {
-                    properties.SetValue(instanceOfT, dataRow[properties.Name], null);
+                    
+                        properties.SetValue(instanceOfT, dataRow[properties.Name], null);
+                   
+                    
                 }
                 return instanceOfT;
             }).ToList();

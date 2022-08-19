@@ -20,7 +20,7 @@ namespace GwesReportApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DocController : ControllerBase
     {
         private IConfiguration _config;
