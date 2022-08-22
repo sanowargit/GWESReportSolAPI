@@ -11,7 +11,7 @@ namespace GwesReportApi.Models
         public List<AcctProfileT1> T1 { get; set; }
         public List<AcctProfileT2> T2 { get; set; }
         public List<AcctProfileT3> T3 { get; set; }
-
+        public List<AcctProfileT4> T4 { get; set; }
 
     }
     public class AcctProfileT1
@@ -50,6 +50,21 @@ namespace GwesReportApi.Models
 
 
     }
+    public class AcctProfileT4
+    {
+        public int AcctId { get; set; }
+
+
+        public int MjrAstTypId { get; set; }
+        public int MnrAstTypId { get; set; }
+        public int AstId { get; set; }
+        public string Symbol { get; set; }
+        public string AstShrtNm { get; set; }
+        public decimal MrktvlAmt { get; set; }
+        public decimal Mv { get; set; }
+        public decimal MvPercent { get; set; }
+    }
+
 
     public class acctInput
     {
