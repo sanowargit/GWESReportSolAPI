@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Data.SqlClient;
 using System.Linq;
 using System;
+using System.Runtime.InteropServices;
 
 namespace GwesReportApi.Helpers
 {
@@ -11,6 +12,10 @@ namespace GwesReportApi.Helpers
     {
         public static List<T> ToList<T>(this DataTable dt)
         {
+            foreach (DataColumn col in dt.Columns)
+            {
+                col.ColumnName = col.ColumnName.Replace(" ", "");
+            }
             const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
             var columnNames = dt.Columns.Cast<DataColumn>()
                 .Select(c => c.ColumnName)
@@ -31,3 +36,4 @@ namespace GwesReportApi.Helpers
         }
     }
 }
+
