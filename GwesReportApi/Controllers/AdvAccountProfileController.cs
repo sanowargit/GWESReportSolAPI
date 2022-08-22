@@ -16,7 +16,7 @@ namespace GwesReportApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class AdvAccountProfileController : ControllerBase
     {
         private IConfiguration _config;
@@ -40,15 +40,18 @@ namespace GwesReportApi.Controllers
             var adapter = new SqlDataAdapter();
 
             var command = new SqlCommand("AdvAccountProfile", (Microsoft.Data.SqlClient.SqlConnection)connection);
+            command.CommandTimeout = 180;
             command.Parameters.AddWithValue("@UserId", acctInput.UserId);
             command.Parameters.AddWithValue("@RoleTypId", acctInput.RoleTypId);
             command.Parameters.AddWithValue("@AcctId", acctInput.AcctId);
             command.CommandType = CommandType.StoredProcedure;
             adapter.SelectCommand = command;
+
             adapter.Fill(dataset);
             advAcctProf.T1 = dataset.Tables[0].ToList<AcctProfileT1>();
             advAcctProf.T2 = dataset.Tables[1].ToList<AcctProfileT2>();
             advAcctProf.T3 = dataset.Tables[2].ToList<AcctProfileT3>();
+            advAcctProf.T4 = dataset.Tables[3].ToList<AcctProfileT4>();
             return advAcctProf;     
         }
 
