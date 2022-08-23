@@ -16,6 +16,7 @@ namespace GwesReportApi.Models
         public int PriceFlag { get; set; }
         public bool IsConsolidation { get; set; }
         public bool ShowExcldAst { get; set; }
+        public int PageId { get; set; }
     }
     public class FixedIncomeMaturityModelOutput
     {

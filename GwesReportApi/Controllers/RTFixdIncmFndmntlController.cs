@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data;
+using DataTableExtensions = GwesReportApi.Helpers.DataTableExtensions;
 
 namespace GwesReportApi.Controllers
 {
@@ -37,11 +38,12 @@ namespace GwesReportApi.Controllers
             var adapter = new SqlDataAdapter();
             var command = new SqlCommand("RT_FixedIncomeFundamentalsReport", (SqlConnection)connection);
             command.Parameters.AddWithValue("@userId", acctInput.UserId);
-            //command.Parameters.AddWithValue("@mAccounts", acctInput.Accounts);
+            command.Parameters.AddWithValue("@mAccounts", "");// acctInput.Accounts);
+            command.Parameters.AddWithValue("@PageId", 1);// acctInput.PageId);
             command.CommandType = CommandType.StoredProcedure;
             adapter.SelectCommand = command;
             adapter.Fill(dataset);
-            rtFixedIncm = dataset.Tables[0].ToList<FixedIncomeFundamentalsModelOutput>();
+            rtFixedIncm = DataTableExtensions.ToList<FixedIncomeFundamentalsModelOutput>(dataset.Tables[0]);//.ToList<FixedIncomeFundamentalsModelOutput>();
             return rtFixedIncm;
         }
     }

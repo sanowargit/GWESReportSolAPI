@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Linq;
+using DataTableExtensions = GwesReportApi.Helpers.DataTableExtensions;
 
 namespace GwesReportApi.Controllers
 {
@@ -37,20 +38,21 @@ namespace GwesReportApi.Controllers
             var command = new SqlCommand("RT_FixedIncomeMaturityReport", (SqlConnection)connection);
             command.Parameters.AddWithValue("@UserId", acctInput.UserId);
             command.Parameters.AddWithValue("@Accounts", acctInput.acctIds);
-            command.Parameters.AddWithValue("@PrstInd", acctInput.PrstInd);
-            command.Parameters.AddWithValue("@StrtDt", acctInput.StrtDt);
-            command.Parameters.AddWithValue("@EndDt", acctInput.EndDt);
-            command.Parameters.AddWithValue("@AsOfDt", acctInput.AsOfDt);
-            command.Parameters.AddWithValue("@PriceDt", acctInput.PriceDt);
-            command.Parameters.AddWithValue("@PriceFlag", acctInput.PriceFlag);
-            command.Parameters.AddWithValue("@IsConsolidation", acctInput.IsConsolidation);
-            command.Parameters.AddWithValue("@ShowExcldAst", acctInput.ShowExcldAst);
+            command.Parameters.AddWithValue("@PageId", acctInput.PageId);
+            command.Parameters.AddWithValue("@PrstInd", 0);// acctInput.PrstInd);
+            command.Parameters.AddWithValue("@StrtDt", "01/01/2022");// acctInput.StrtDt);
+            command.Parameters.AddWithValue("@EndDt", "04/30/2022"); // acctInput.EndDt);
+            command.Parameters.AddWithValue("@AsOfDt", "04/20/2022");// acctInput.AsOfDt);
+            command.Parameters.AddWithValue("@PriceDt", "04/20/2022");// acctInput.PriceDt);
+            command.Parameters.AddWithValue("@PriceFlag", 1); // acctInput.PriceFlag);
+            command.Parameters.AddWithValue("@IsConsolidation", 0);// acctInput.IsConsolidation);
+            command.Parameters.AddWithValue("@ShowExcldAst", 1);// acctInput.ShowExcldAst);
             command.CommandType = CommandType.StoredProcedure;
             adapter.SelectCommand = command;
             adapter.Fill(dataset);
-            rtFixdIncmM.fIM1 = dataset.Tables[0].ToList<FixedIncomeMaturityModelOutput1>();
-            rtFixdIncmM.fIM2 = dataset.Tables[1].ToList<FixedIncomeMaturityModelOutput2>();
-            rtFixdIncmM.fIM3 = dataset.Tables[2].ToList<FixedIncomeMaturityModelOutput3>();
+            rtFixdIncmM.fIM1 = DataTableExtensions.ToList<FixedIncomeMaturityModelOutput1>(dataset.Tables[0]);
+            rtFixdIncmM.fIM2 = DataTableExtensions.ToList<FixedIncomeMaturityModelOutput2>(dataset.Tables[1]);
+            rtFixdIncmM.fIM3 = DataTableExtensions.ToList<FixedIncomeMaturityModelOutput3>(dataset.Tables[2]);
             return rtFixdIncmM;
         }
     }
