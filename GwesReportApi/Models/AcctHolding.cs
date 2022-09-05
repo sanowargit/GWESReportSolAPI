@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Collections.ObjectModel;
 
 namespace GwesReportApi.Models
 {
@@ -62,11 +63,17 @@ namespace GwesReportApi.Models
         public string ASC820 { get; set; }
 
     }
+    public class LstAcctHolding
+    {
+        public ObservableCollection<AcctHolding> OCAcctHolding { get; set; }
+
+    }
     public class AcctHoldingInput
     {
         public int UserId { get; set; }
-        
 
+        public int PageId { get; set; }
+        
 
     }
 }

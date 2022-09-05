@@ -7,7 +7,8 @@ namespace GwesReportApi.Models
     {
         public int UserId { get; set; }
         public string acctIds { get; set; }
-        
+        public int PageId { get; set; }
+
         //public int PrstInd { get; set; }
         //public string AsOfDt { get; set; }
         //public string PriceDt { get; set; }
@@ -31,18 +32,18 @@ namespace GwesReportApi.Models
         public int AstId { get; set; }
         public int MtrtyYr { get; set; }
         public string AstShrtNm { get; set; }
-        public double CouponRate { get; set; }
+        public decimal CouponRate { get; set; }
         public DateTime MaturityDt { get; set; }
         public decimal Shares { get; set; }
         public decimal Market { get; set; }
         public decimal Yield { get; set; }
-        public double YldToMtrty { get; set; }
-        public double Duration { get; set; }
-        public double YldCalPut { get; set; }
-        public double CalPutDuration { get; set; }
+        public decimal YldToMtrty { get; set; }
+        public decimal Duration { get; set; }
+        public decimal YldCalPut { get; set; }
+        public decimal CalPutDuration { get; set; }
         public string MoodyRating { get; set; }
         public string SPRating { get; set; }
-        public double Income { get; set; }
+        public decimal Income { get; set; }
         public bool DateTm { get; set; }
         public bool PageNo { get; set; }
         public string ExcldAssetMsg { get; set; }

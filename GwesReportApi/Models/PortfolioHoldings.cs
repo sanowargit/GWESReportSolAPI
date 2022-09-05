@@ -5,49 +5,45 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-/*
- * Author       :   Abhranil
- * Description  :   Model for Portfolio Holdings Report
- * Create Date  :   03-Aug-2022
-*/
 
 namespace GwesReportApi.Models
 {
     public class PortfolioHoldings
     {
         public int AsOfId { get; set; }
+        public int PageId { get; set; }
     }
 
     
 
     public class PortFolioHoldingsMainOutPut
     {
-        public string Acctno { get; set; }
-        public string AcctName { get; set; }
-        public string AcctSortKey { get; set; }
-        public string AcctType { get; set; }
-        public int AcctTypeSort { get; set; }
+        public string AccountNumber { get; set; }
+        public string AccountName { get; set; }
+        public string AcctAlphaSortKey { get; set; }
+        public string AccountType { get; set; }
+        public int AcctTypeSortKey { get; set; }
         public string Administrator { get; set; }
         public string Admin { get; set; }
-        public string Branch { get; set; }
-        public string InvestOffc { get; set; }
-        public string IncCode { get; set; }
-        public string LastShortName { get; set;}
+        public string BranchName { get; set; }
+        public string InvestmentOfficer { get; set; }
+        public string Inv { get; set; }
+        public string LastShort { get; set;}
         public string AstShrtNm { get; set; }
-        public string AssettShrtNm { get; set; }
+        public string AssetShrtNm { get; set; }
         public decimal CouponRate { get; set; }
-        public DateTime MaturityDate { get; set; }
+        public DateTime MaturityDt { get; set; }
         public int MjrAstTypId { get; set; }
-        public int MjrAstSort { get; set; }
-        public string MjrAstType { get; set; }
+        public int MajorAssetSort { get; set; }
+        public string MajorAssetType { get; set; }
         public int MnrAstTypId { get; set; }
-        public int MnrAstSort { get; set; }
-        public string MnrAstType { get; set; }
+        public int MinorAssetSort { get; set; }
+        public string MinorAssetType { get; set; }
         public int DcmlPrcsn { get; set; }
         public string Units { get; set; }
         public decimal Shares { get; set; }
         public decimal Market { get; set; }
-        public decimal MktPrcnt { get; set; }
+        public decimal MarketPercent { get; set; }
         public string Cusip { get; set; }
         public string Ticker { get; set; }
         public decimal TxcstAmt { get; set; }
@@ -57,13 +53,13 @@ namespace GwesReportApi.Models
         public string Star { get; set; }
         public decimal Income { get; set; }
         public decimal Yield { get; set; }
-        public bool TimeRun { get; set; }
+        public bool DateTime { get; set; }
         public bool PageNo { get; set; }
-        public int IndstryTypeId { get; set; }
-        public string IndstryTypeName { get; set; }
-        public int IndstryTypeSort { get; set; }
-        public bool IndstryInd{ get; set; }
-        public decimal TotMkt { get; set; }
+        public int IndustryTypeID { get; set; }
+        public string IndustryTypeName { get; set; }
+        public int IndustryTypeSort { get; set; }
+        public bool IndustryIndicator { get; set; }
+        public decimal TotMarket { get; set; }
         public DateTime PriceDate { get; set; }
         public string ExcldAssetMsg { get; set; }
         public decimal P1CashBlncAmt { get; set; }
@@ -73,9 +69,9 @@ namespace GwesReportApi.Models
         public decimal ExcldCashAmt { get; set; }
         public int NoPosition { get; set; }
         public int EQFIIndicator { get; set; }
-        public decimal EquityPerc { get; set; }
+        public decimal EquityPercent { get; set; }
         public int AcctId { get; set; }
-        public int AssetId { get; set; }
+        public int AstId { get; set; }
         public int Level1TypeId { get; set; }
         public string Level1Desc { get; set; }
         public int Level2TypeId { get; set; }
@@ -101,6 +97,8 @@ namespace GwesReportApi.Models
         public int SecSrtKey { get; set; }
         public decimal NbrShrs { get; set; }
         public string Pledge { get; set; }
+        public string tckerCusip { get; set; }
+        public string Account { get; set; }
     }
 
     public class PortFolioHoldingsTradeTypeOutPut
@@ -120,7 +118,7 @@ namespace GwesReportApi.Models
 
     public class PortfolioHoldingsOutput
     {
-        public List<PortFolioHoldingsMainOutPut> ocPortFolioHoldingsMainOutPut { get; set; }
+        public ObservableCollection<PortFolioHoldingsMainOutPut> ocPortFolioHoldingsMainOutPut { get; set; }
         public List<PortFolioHoldingsTradeTypeOutPut> ocPortFolioHoldingsTradeTypeOutPut { get; set; }
 
 
