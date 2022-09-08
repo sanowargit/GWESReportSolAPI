@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Data;
 using System.Linq;
+using DataTableExtensions = GwesReportApi.Helpers.DataTableExtensions;
 
 namespace GwesReportApi.Controllers
 {
@@ -37,20 +39,28 @@ namespace GwesReportApi.Controllers
             var command = new SqlCommand("RT_FixedIncomeMaturityReport", (SqlConnection)connection);
             command.Parameters.AddWithValue("@UserId", acctInput.UserId);
             command.Parameters.AddWithValue("@Accounts", acctInput.acctIds);
+            command.Parameters.AddWithValue("@PageId", acctInput.PageId);
             command.Parameters.AddWithValue("@PrstInd", acctInput.PrstInd);
-            command.Parameters.AddWithValue("@StrtDt", acctInput.StrtDt);
-            command.Parameters.AddWithValue("@EndDt", acctInput.EndDt);
+            if(string.IsNullOrEmpty(acctInput.StrtDt))
+                command.Parameters.AddWithValue("@StrtDt", DBNull.Value);
+            else
+                command.Parameters.AddWithValue("@StrtDt", acctInput.StrtDt);
+            if (string.IsNullOrEmpty(acctInput.EndDt))
+                command.Parameters.AddWithValue("@EndDt", DBNull.Value);
+            else
+                command.Parameters.AddWithValue("@EndDt", acctInput.EndDt);
             command.Parameters.AddWithValue("@AsOfDt", acctInput.AsOfDt);
             command.Parameters.AddWithValue("@PriceDt", acctInput.PriceDt);
             command.Parameters.AddWithValue("@PriceFlag", acctInput.PriceFlag);
             command.Parameters.AddWithValue("@IsConsolidation", acctInput.IsConsolidation);
             command.Parameters.AddWithValue("@ShowExcldAst", acctInput.ShowExcldAst);
             command.CommandType = CommandType.StoredProcedure;
+            command.CommandTimeout = 180;
             adapter.SelectCommand = command;
             adapter.Fill(dataset);
-            rtFixdIncmM.fIM1 = dataset.Tables[0].ToList<FixedIncomeMaturityModelOutput1>();
-            rtFixdIncmM.fIM2 = dataset.Tables[1].ToList<FixedIncomeMaturityModelOutput2>();
-            rtFixdIncmM.fIM3 = dataset.Tables[2].ToList<FixedIncomeMaturityModelOutput3>();
+            rtFixdIncmM.fIM1 = DataTableExtensions.ToList<FixedIncomeMaturityModelOutput1>(dataset.Tables[0]).Where(x => x.MtrtyYr != 0).ToList(); ;
+            rtFixdIncmM.fIM2 = DataTableExtensions.ToList<FixedIncomeMaturityModelOutput2>(dataset.Tables[1]);
+            rtFixdIncmM.fIM3 = DataTableExtensions.ToList<FixedIncomeMaturityModelOutput3>(dataset.Tables[2]);
             return rtFixdIncmM;
         }
     }

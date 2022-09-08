@@ -8,8 +8,9 @@ namespace GwesReportApi.Models
     
         public class AcctSectInputs
         {
-            public int mSpUserId { get; set; }
-            public int mBenchMarkId { get; set; }
+        public int mAsOfId { get; set; }
+        public int PageId { get; set; }
+        public int mBenchMark { get; set; }
         }
 
         public class AcctSectT1
@@ -27,10 +28,6 @@ namespace GwesReportApi.Models
             public string InvestmentOfficer { get; set; }
             public bool DateTime { get; set; }
             public bool PageNo { get; set; }
-            public int RptTmpltId { get; set; }
-            public int RowAltColorIdFirst { get; set; }
-            public int RowAltColorIdSecond { get; set; }
-            public byte[] LogoFileImage { get; set; }
         }
 
         public class AcctSectT2
@@ -39,10 +36,10 @@ namespace GwesReportApi.Models
             public int GroupId { get; set; }
             public int SrtKey { get; set; }
             public string GroupHeader { get; set; }
-            public double MarketPercent { get; set; }
-            public double BMPcnt { get; set; }
-            public double VarBMPcnt { get; set; }
-            public double PcntOfBMPcnt { get; set; }
+            public decimal MarketPercent { get; set; }
+            public decimal BMPcnt { get; set; }
+            public decimal VarBMPcnt { get; set; }
+            public decimal PcntOfBMPcnt { get; set; }
             public int ExcldInd { get; set; }
             public int MjrMnrIndstryInd { get; set; }
             public int ModelTypeId { get; set; }

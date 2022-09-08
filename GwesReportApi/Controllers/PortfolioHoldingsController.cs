@@ -40,6 +40,7 @@ namespace GwesReportApi.Controllers
             var command = new SqlCommand("RT_PortFolioHoldings", (Microsoft.Data.SqlClient.SqlConnection)connection);
             command.Parameters.AddWithValue("@AsOfId", PortfolioHoldings.AsOfId);
             command.Parameters.AddWithValue("@PageId", PortfolioHoldings.PageId);
+            command.CommandTimeout = 180;
             command.CommandType = CommandType.StoredProcedure;
             adapter.SelectCommand = command;
             adapter.Fill(dataset);

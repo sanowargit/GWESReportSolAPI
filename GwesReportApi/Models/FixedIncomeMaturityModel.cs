@@ -16,6 +16,7 @@ namespace GwesReportApi.Models
         public int PriceFlag { get; set; }
         public bool IsConsolidation { get; set; }
         public bool ShowExcldAst { get; set; }
+        public int PageId { get; set; }
     }
     public class FixedIncomeMaturityModelOutput
     {
@@ -41,7 +42,7 @@ namespace GwesReportApi.Models
         public decimal Market { get; set; }
         public decimal Income { get; set; }
         public decimal Yield { get; set; }
-        public double MarketPercent { get; set; }
+        public decimal MarketPercent { get; set; }
         public bool DateTm { get; set; }
         public bool PageNo { get; set; }
     }
@@ -53,7 +54,7 @@ namespace GwesReportApi.Models
         public decimal Market { get; set; }
         public decimal Income { get; set; }
         public decimal Yield { get; set; }
-        public double MarketPercent { get; set; }
+        public decimal MarketPercent { get; set; }
     }
     public class FixedIncomeMaturityModelOutput3
     {

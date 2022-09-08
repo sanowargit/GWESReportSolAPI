@@ -34,14 +34,15 @@ namespace GwesReportApi.Controllers
             var dataset = new DataSet();
             var adapter = new SqlDataAdapter();
 
-            var command = new SqlCommand("ADV_AccountSectorsBenchmark", (Microsoft.Data.SqlClient.SqlConnection)connection);
-            command.Parameters.AddWithValue("@mSpUserId", AcctSectInputs.mSpUserId);
-            command.Parameters.AddWithValue("@mBenchMarkId", AcctSectInputs.mBenchMarkId);
+            var command = new SqlCommand("RT_AccountSectorsBenchmark", (Microsoft.Data.SqlClient.SqlConnection)connection);
+            command.Parameters.AddWithValue("@mAsOfId", AcctSectInputs.mAsOfId);
+            command.Parameters.AddWithValue("@PageId", AcctSectInputs.PageId);
+            command.Parameters.AddWithValue("@mBenchMark", AcctSectInputs.mBenchMark);
             command.CommandType = CommandType.StoredProcedure;
             adapter.SelectCommand = command;
             adapter.Fill(dataset);
             AcctSectOutput.OcAcctSectT1 = dataset.Tables[0].ToList<AcctSectT1>();
-            AcctSectOutput.OcAcctSectT2 = dataset.Tables[0].ToList<AcctSectT2>();
+            AcctSectOutput.OcAcctSectT2 = dataset.Tables[1].ToList<AcctSectT2>();
             return AcctSectOutput;
         }
     }
